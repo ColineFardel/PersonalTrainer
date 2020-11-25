@@ -21,6 +21,11 @@ import Customerlist from './components/Customerlist';
 import Traininglist from './components/Traininglist';
 import ViewListIcon from '@material-ui/icons/ViewList';
 
+
+/**
+ * The code is based on the Material-UI drawers documentation for the persistant drawer
+ * https://material-ui.com/components/drawers/
+ */
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -57,8 +62,6 @@ const useStyles = makeStyles((theme) => ({
   drawerHeader: {
     display: 'flex',
     alignItems: 'center',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
   },
@@ -109,7 +112,6 @@ export default function PersistentDrawerLeft() {
         <Toolbar>
           <IconButton
             color="inherit"
-            aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
             className={clsx(classes.menuButton, open && classes.hide)}
@@ -133,7 +135,7 @@ export default function PersistentDrawerLeft() {
         >
           <div className={classes.drawerHeader}>
             <IconButton onClick={handleDrawerClose}>
-              {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+              <ChevronLeftIcon />
             </IconButton>
           </div>
           <Divider />
