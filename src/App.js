@@ -15,8 +15,6 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import PeopleIcon from '@material-ui/icons/People';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Customerlist from './components/Customerlist';
@@ -80,6 +78,10 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginLeft: 0,
   },
+  link: {
+    textDecoration: 'none',
+    color: 'black',
+  }
 }));
 
 export default function PersistentDrawerLeft() {
@@ -114,8 +116,8 @@ export default function PersistentDrawerLeft() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            Persistent drawer
+          <Typography variant="h6">
+            Personal Trainer
           </Typography>
         </Toolbar>
       </AppBar>
@@ -136,7 +138,7 @@ export default function PersistentDrawerLeft() {
           </div>
           <Divider />
           <List>
-            <Link to="/">
+            <Link to="/" className={classes.link}>
               <ListItem button>
                 <ListItemIcon>
                   <PeopleIcon />
@@ -144,7 +146,7 @@ export default function PersistentDrawerLeft() {
                 <ListItemText primary={"Customers"} />
               </ListItem>
             </Link>
-            <Link to="/trainings">
+            <Link to="/trainings" className={classes.link}>
               <ListItem button>
                 <ListItemIcon>
                   <ViewListIcon />
