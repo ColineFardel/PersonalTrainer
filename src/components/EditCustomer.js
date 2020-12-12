@@ -16,19 +16,18 @@ function EditCustomer(props) {
         lastname: '',
         email: '',
         phone: '',
-        address: '',
+        streetaddress: '',
         postcode: '',
         city: '',
     })
 
     const handleClickOpen = () => {
-        console.log(props.params);
         setCustomer({
             firstname: props.params.data.firstname,
             lastname: props.params.data.lastname,
             email: props.params.data.email,
             phone: props.params.data.phone,
-            address: props.params.data.address,
+            streetaddress: props.params.data.streetaddress,
             postcode: props.params.data.postcode,
             city: props.params.data.city,
         });
@@ -90,8 +89,8 @@ function EditCustomer(props) {
                         fullWidth
                     />
                     <TextField
-                        name="address"
-                        value={customer.address}
+                        name="streetaddress"
+                        value={customer.streetaddress}
                         onChange={inputChanged}
                         margin="dense"
                         label="Address"

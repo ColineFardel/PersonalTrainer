@@ -14,7 +14,7 @@ function AddCustomer(props) {
         lastname: '',
         email: '',
         phone: '',
-        address: '',
+        streetaddress: '',
         postcode: '',
         city: '',
     })
@@ -38,7 +38,7 @@ function AddCustomer(props) {
 
     return (
         <div>
-            <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+            <Button size="small" variant="outlined" color="primary" onClick={handleClickOpen}>
                 Add Customer
             </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
@@ -78,8 +78,8 @@ function AddCustomer(props) {
                         fullWidth
                     />
                     <TextField
-                        name="address"
-                        value={customer.address}
+                        name="streetaddress"
+                        value={customer.streetaddress}
                         onChange={inputChanged}
                         margin="dense"
                         label="Address"

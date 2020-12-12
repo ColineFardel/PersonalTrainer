@@ -5,6 +5,7 @@ import 'ag-grid-community/dist/styles/ag-theme-material.css';
 import Snackbar from '@material-ui/core/Snackbar';
 import AddCustomer from './AddCustomer';
 import EditCustomer from './EditCustomer';
+import AddTraining from './AddTraining';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 
@@ -19,8 +20,9 @@ function Customerlist() {
         getCustomers();
     }, [])
 
-    const deleteCustomer = (link) => {
-        if (window.confirm('Are you sure ?)')) {
+    const deleteCustomer = (links) => {
+        let link = links.value[0].href;
+        if (window.confirm('Are you sure ?')) {
             fetch(link, {
                 method: 'DELETE'
             })
@@ -43,18 +45,24 @@ function Customerlist() {
         { headerName: 'City', field: 'city', sortable: true, filter: true },
         {
             headerName: '',
-            field: '_links.self.href',
+            field: 'links',
+            width: 200,
+            cellRendererFramework: params => <AddTraining addTraining={addTraining} params={params} />
+        },
+        {
+            headerName: '',
+            field: 'links',
             width: 80,
             cellRendererFramework: params => <EditCustomer updateCustomer={updateCustomer} params={params} />
         },
         {
             headerName: '',
-            field: '_links.self.href',
+            field: 'links',
             width: 80,
             cellRendererFramework: params => <IconButton
                 color='secondary'
                 size='small'
-                onClick={() => deleteCustomer(params.value)}>
+                onClick={() => deleteCustomer(params)}>
                 <DeleteIcon />
             </IconButton>
         },
@@ -68,6 +76,19 @@ function Customerlist() {
         fetch('https://customerrest.herokuapp.com/api/customers')
             .then(response => response.json())
             .then(data => setCustomers(data.content))
+            .catch(err => console.error(err))
+    }
+
+    const addTraining = (newTraining) => {
+        fetch('https://customerrest.herokuapp.com/api/trainings', {
+            method: 'POST',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify(newTraining)
+        })
+            .then(_ => {
+                setMsg('Training added successfully');
+                setOpen(true);
+            })
             .catch(err => console.error(err))
     }
 
@@ -85,7 +106,8 @@ function Customerlist() {
             .catch(err => console.error(err))
     }
 
-    const updateCustomer = (link, customer) => {
+    const updateCustomer = (links, customer) => {
+        let link = links[0].href;
         fetch(link, {
             method: 'PUT',
             headers: {
