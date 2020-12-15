@@ -19,6 +19,8 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Customerlist from './components/Customerlist';
 import Traininglist from './components/Traininglist';
 import ViewListIcon from '@material-ui/icons/ViewList';
+import Calendar from './components/Calendar';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 
 
 /**
@@ -155,6 +157,14 @@ export default function PersistentDrawerLeft() {
                 <ListItemText primary={"Trainings"} />
               </ListItem>
             </Link>
+            <Link to="/calendar" className={classes.link}>
+              <ListItem button>
+                <ListItemIcon>
+                  <CalendarTodayIcon />
+                </ListItemIcon>
+                <ListItemText primary={"Calendar"} />
+              </ListItem>
+            </Link>
           </List>
         </Drawer>
         <main
@@ -166,6 +176,7 @@ export default function PersistentDrawerLeft() {
           <Switch>
             <Route exact path="/" component={Customerlist} />
             <Route path="/trainings" component={Traininglist} />
+            <Route path="/calendar" component={Calendar} />
           </Switch>
         </main>
       </Router>
